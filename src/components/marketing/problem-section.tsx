@@ -1,25 +1,25 @@
-import { AlertCircle, Clock, DollarSign, Users } from "lucide-react";
+import { AlertCircle, Clock, DollarSign, FileX } from "lucide-react";
 
 const problems = [
   {
     icon: Clock,
-    title: "Scheduling Chaos",
-    description: "Juggling appointments on paper, missing jobs, and double-booking customers.",
+    title: "10pm Invoicing",
+    description: "You finished the job at 5. You're still doing paperwork at 10. From the couch.",
   },
   {
-    icon: Users,
-    title: "Lost Leads",
-    description: "Potential customers slip through the cracks because you're too busy working to follow up.",
+    icon: FileX,
+    title: "The Shoebox",
+    description: "Receipts in the glovebox. Notes on napkins. Tax time is a nightmare.",
   },
   {
     icon: DollarSign,
-    title: "Unpaid Invoices",
-    description: "Chasing payments while trying to run your business. Money sitting on the table.",
+    title: "Chasing Payments",
+    description: "You did the work. They forgot to pay. Now you're texting reminders.",
   },
   {
     icon: AlertCircle,
-    title: "No Time for Growth",
-    description: "Stuck doing paperwork instead of the work that actually pays the bills.",
+    title: "Wrong Software",
+    description: "Every app is built for crews of five. You are the crew.",
   },
 ];
 
@@ -28,12 +28,11 @@ export function ProblemSection() {
     <section className="border-y border-border/40 bg-muted/30 py-20">
       <div className="container mx-auto max-w-6xl px-4">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
-            Sound Familiar?
+          <h2 className="font-[family-name:var(--font-playfair)] text-3xl font-bold tracking-tight md:text-4xl">
+            You run the whole business from <em className="text-primary">your truck</em>.
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            Running a trade business is hard enough. You shouldn&apos;t need a degree in
-            software to manage your customers and get paid.
+            But the software out there? Built for companies with office staff. Not for you.
           </p>
         </div>
 

@@ -58,11 +58,11 @@ export function WaitlistForm() {
               <span className="text-sm font-semibold uppercase tracking-wider text-primary">
                 Early Access
               </span>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight">
-                Join the Waitlist
+              <h2 className="font-[family-name:var(--font-playfair)] mt-4 text-3xl font-bold tracking-tight">
+                Get <em className="text-primary">back in command</em>.
               </h2>
               <p className="mt-2 text-muted-foreground">
-                Be first in line when we launch. Early members get exclusive pricing.
+                Join the waitlist. Early operators get exclusive pricing.
               </p>
             </div>
 

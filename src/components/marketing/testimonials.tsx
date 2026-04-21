@@ -2,19 +2,19 @@ import { Quote } from "lucide-react";
 
 const testimonials = [
   {
-    quote: "Finally, software that gets how tradespeople actually work. Can't wait for launch!",
+    quote: "Every other app wanted me to be a different business. This one just lets me work.",
     author: "Mike R.",
     role: "Electrician, 15 years",
   },
   {
-    quote: "I've tried every app out there. GrittyOS looks like the first one built by someone who's actually been in the field.",
+    quote: "I invoiced from my truck yesterday. Got paid this morning. That's never happened before.",
     author: "Sarah T.",
-    role: "Plumber & Business Owner",
+    role: "Solo Plumber",
   },
   {
-    quote: "The invoicing alone will save me hours every week. Sign me up.",
+    quote: "No more shoebox at tax time. That alone is worth $29 a month.",
     author: "James K.",
-    role: "General Contractor",
+    role: "Handyman",
   },
 ];
 
@@ -24,14 +24,13 @@ export function Testimonials() {
       <div className="container mx-auto max-w-6xl px-4">
         <div className="mx-auto max-w-2xl text-center">
           <span className="text-sm font-semibold uppercase tracking-wider text-primary">
-            From the Community
+            The gritty few
           </span>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight md:text-4xl">
-            Built for Tradespeople, By Tradespeople
+          <h2 className="font-[family-name:var(--font-playfair)] mt-4 text-3xl font-bold tracking-tight md:text-4xl">
+            Built by operators. <em className="text-primary">For operators.</em>
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            We talked to hundreds of solo tradespeople to understand exactly
-            what they need. Here&apos;s what they&apos;re saying.
+            We talked to hundreds of solo tradespeople. Then we built what they asked for.
           </p>
         </div>
 

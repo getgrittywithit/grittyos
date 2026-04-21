@@ -23,14 +23,13 @@ export function FeaturesGrid() {
       <div className="container mx-auto max-w-6xl px-4">
         <div className="mx-auto max-w-2xl text-center">
           <span className="text-sm font-semibold uppercase tracking-wider text-primary">
-            Features
+            The tools
           </span>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight md:text-4xl">
-            Everything You Need to Run Your Business
+          <h2 className="font-[family-name:var(--font-playfair)] mt-4 text-3xl font-bold tracking-tight md:text-4xl">
+            One tap from quote to <em className="text-primary">paid</em> to taxed.
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            Powerful tools designed for solo tradespeople. Simple enough to use
-            between jobs, powerful enough to grow your business.
+            Truck-first, not desk-first. Every feature works hands-free.
           </p>
         </div>
 
