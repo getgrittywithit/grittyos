@@ -1,0 +1,1221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>GrittyOS — Pre-Seed Pitch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="deck-stage.js"></script>
+<style>
+  /* ── tokens ──────────────────────────────────────────────────── */
+  :root{
+    --navy-900:#070F1E;
+    --navy-800:#0A1628;
+    --navy-700:#101E33;
+    --navy-600:#17273F;
+    --navy-500:#1E3351;
+    --line:#1F3350;
+    --line-strong:#2B4668;
+    --ink:#F3EFE7;          /* warm off-white */
+    --ink-dim:#A7B2C3;
+    --ink-mute:#6B7A92;
+    --orange:#FF6B35;
+    --orange-soft:#FFB38A;
+    --orange-ink:#2A0D03;
+    --sans:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;
+    --serif:"Instrument Serif",Georgia,serif;
+    --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  }
+  html,body{margin:0;padding:0;background:#000;font-family:var(--sans);color:var(--ink);}
+  deck-stage section{
+    background:var(--navy-800);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:34px;
+    line-height:1.35;
+    font-weight:400;
+    letter-spacing:-0.005em;
+    position:relative;
+  }
+
+  /* ── primitives ──────────────────────────────────────────────── */
+  .slide{
+    width:100%;height:100%;
+    padding:100px;
+    box-sizing:border-box;
+    display:flex;flex-direction:column;
+    position:relative;
+  }
+  .slide.pad-tight{padding:80px 100px;}
+
+  /* corner chrome on every slide */
+  .chrome{
+    position:absolute;inset:40px 60px auto 60px;
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:var(--mono);font-size:16px;letter-spacing:.08em;
+    color:var(--ink-mute);text-transform:uppercase;
+    pointer-events:none;
+  }
+  .chrome .mark{display:flex;align-items:center;gap:12px;color:var(--ink-dim);}
+  .chrome .mark .dot{width:10px;height:10px;background:var(--orange);border-radius:2px;transform:rotate(45deg);}
+  .chrome .mark b{font-weight:600;color:var(--ink);letter-spacing:.12em;}
+
+  /* section label ("02 / The Problem") */
+  .eyebrow{
+    font-family:var(--mono);font-size:18px;letter-spacing:.16em;
+    color:var(--orange);text-transform:uppercase;
+    display:flex;align-items:center;gap:16px;
+  }
+  .eyebrow .num{color:var(--orange);}
+  .eyebrow .sep{color:var(--line-strong);}
+  .eyebrow .label{color:var(--ink-dim);}
+
+  h1.title{
+    font-family:var(--serif);font-weight:400;
+    font-size:128px;line-height:1.02;letter-spacing:-.02em;
+    margin:0;color:var(--ink);
+  }
+  h1.title em{color:var(--orange);font-style:italic;}
+  h2.display{
+    font-family:var(--serif);font-weight:400;font-style:normal;
+    font-size:96px;line-height:1.04;letter-spacing:-.02em;
+    margin:0;color:var(--ink);
+  }
+  h2.display em{font-style:italic;color:var(--orange);}
+  h3.slide-title{
+    font-family:var(--sans);font-weight:500;
+    font-size:64px;line-height:1.08;letter-spacing:-.02em;
+    margin:0;color:var(--ink);
+  }
+  .kicker{font-size:28px;color:var(--ink-dim);font-weight:400;}
+  .body{font-size:32px;line-height:1.4;color:var(--ink-dim);max-width:1100px;}
+
+  .serif-sub{font-family:var(--serif);font-size:56px;line-height:1.1;letter-spacing:-.015em;color:var(--ink);}
+  .serif-sub em{color:var(--orange);font-style:italic;}
+
+  .rule{height:1px;background:var(--line);width:100%;}
+  .rule-strong{height:1px;background:var(--line-strong);width:100%;}
+
+  .pill{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:var(--mono);font-size:15px;letter-spacing:.1em;
+    padding:10px 16px;border:1px solid var(--line-strong);
+    border-radius:999px;color:var(--ink-dim);text-transform:uppercase;
+  }
+  .pill .dot{width:8px;height:8px;background:var(--orange);border-radius:50%;}
+
+  /* shared footer line */
+  .footer{
+    position:absolute;left:60px;right:60px;bottom:40px;
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:var(--mono);font-size:15px;letter-spacing:.1em;color:var(--ink-mute);
+    text-transform:uppercase;
+  }
+
+  /* logo */
+  .logo{display:inline-flex;align-items:center;gap:14px;font-family:var(--sans);font-weight:600;letter-spacing:-.01em;color:var(--ink);}
+  .logo .glyph{
+    width:40px;height:40px;position:relative;display:grid;place-items:center;
+    background:var(--orange);border-radius:9px;
+    box-shadow:0 0 0 6px rgba(255,107,53,.12);
+  }
+  .logo .glyph::before{
+    content:"";position:absolute;inset:10px;border:2.5px solid var(--orange-ink);
+    border-radius:3px;border-bottom:none;border-right:none;
+    transform:rotate(-45deg);
+  }
+  .logo .glyph::after{
+    content:"";position:absolute;width:16px;height:3px;background:var(--orange-ink);
+    transform:rotate(45deg) translate(2px,0);
+  }
+  .logo .word{font-size:28px;}
+  .logo .word b{font-weight:600;}
+  .logo .word span{color:var(--orange);}
+
+  /* ═══ SLIDE 1 — COVER ═══════════════════════════════════════ */
+  .s-cover{
+    background:
+      radial-gradient(1200px 700px at 85% 115%, rgba(255,107,53,.22), transparent 60%),
+      radial-gradient(800px 500px at 15% -10%, rgba(255,107,53,.08), transparent 60%),
+      var(--navy-900);
+  }
+  .s-cover .grid-bg{
+    position:absolute;inset:0;opacity:.25;pointer-events:none;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:120px 120px;
+    mask-image:radial-gradient(ellipse at 50% 50%, #000 30%, transparent 75%);
+  }
+  .cover-stack{margin-top:auto;position:relative;z-index:2;}
+  .cover-title{
+    font-family:var(--serif);font-weight:400;
+    font-size:108px;line-height:1.02;letter-spacing:-.035em;
+    margin:0;color:var(--ink);max-width:1500px;
+  }
+  .cover-title .slash{color:var(--orange);font-style:italic;}
+  .cover-sub{
+    font-family:var(--serif);font-style:italic;font-size:42px;
+    color:var(--orange-soft);margin-top:56px;letter-spacing:-.01em;
+  }
+  .cover-meta{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    margin-top:80px;padding-top:40px;border-top:1px solid var(--line-strong);
+    font-family:var(--mono);font-size:20px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-dim);
+  }
+  .cover-meta b{color:var(--ink);font-weight:500;}
+  .cover-badge{
+    position:absolute;top:90px;right:80px;
+    display:flex;flex-direction:column;align-items:flex-end;gap:10px;
+    font-family:var(--mono);font-size:18px;letter-spacing:.14em;
+    color:var(--ink-mute);text-transform:uppercase;
+    z-index:3;text-align:right;
+  }
+  .cover-badge .num{
+    font-family:var(--serif);font-style:italic;font-size:52px;
+    color:var(--orange);letter-spacing:-.02em;line-height:1;
+  }
+
+  /* ═══ SLIDE 2 — PROBLEM ═══════════════════════════════════ */
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:80px;flex:1;margin-top:56px;}
+  .problem-list{display:flex;flex-direction:column;gap:0;margin-top:40px;}
+  .problem-row{
+    display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:baseline;
+    padding:18px 0;border-top:1px solid var(--line);
+  }
+  .problem-row .n{font-family:var(--mono);font-size:16px;color:var(--orange);letter-spacing:.1em;padding-top:6px;}
+  .problem-row .head{font-size:28px;font-weight:500;color:var(--ink);letter-spacing:-.01em;margin-bottom:6px;}
+  .problem-row .desc{font-size:20px;color:var(--ink-dim);line-height:1.35;}
+
+  .stat-card{
+    padding:36px;border:1px solid var(--line-strong);border-radius:18px;
+    background:linear-gradient(180deg,rgba(255,107,53,.04),transparent);
+    display:flex;flex-direction:column;gap:6px;
+  }
+  .stat-card .fig{
+    font-family:var(--serif);font-size:92px;line-height:1;color:var(--orange);
+    letter-spacing:-.03em;
+  }
+  .stat-card .fig small{font-size:48px;color:var(--ink);}
+  .stat-card .cap{font-size:22px;color:var(--ink-dim);line-height:1.35;margin-top:8px;}
+  .stat-card .src{font-family:var(--mono);font-size:14px;color:var(--ink-mute);letter-spacing:.08em;text-transform:uppercase;margin-top:12px;}
+
+  /* ═══ SLIDE 3 — MARKET ═══════════════════════════════════ */
+  .tam-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:80px;margin-top:60px;flex:1;}
+  .tam-rings{position:relative;aspect-ratio:1/1;max-width:700px;width:100%;margin:auto;}
+  .ring{
+    position:absolute;inset:0;border-radius:50%;display:grid;place-items:center;
+    border:1px solid var(--line-strong);
+  }
+  .ring.tam{background:rgba(255,107,53,.03);}
+  .ring.sam{inset:14%;background:rgba(255,107,53,.06);border-color:rgba(255,107,53,.3);}
+  .ring.som{inset:34%;background:rgba(255,107,53,.12);border-color:var(--orange);}
+  .ring-lbl{
+    position:absolute;font-family:var(--mono);font-size:13px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--ink-dim);
+    background:var(--navy-800);padding:6px 12px;
+  }
+  .ring.tam > .ring-lbl{top:-12px;left:50%;transform:translateX(-50%);}
+  .ring.sam > .ring-lbl{top:-12px;left:50%;transform:translateX(-50%);color:var(--orange-soft);}
+  .ring.som > .ring-lbl{top:-12px;left:50%;transform:translateX(-50%);color:var(--orange);}
+
+  .tam-legend{display:flex;flex-direction:column;gap:36px;justify-content:center;}
+  .tam-row{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:baseline;padding-bottom:28px;border-bottom:1px solid var(--line);}
+  .tam-row .tag{font-family:var(--mono);font-size:14px;letter-spacing:.14em;color:var(--orange);text-transform:uppercase;}
+  .tam-row .lbl{font-size:28px;color:var(--ink);}
+  .tam-row .lbl small{display:block;font-size:18px;color:var(--ink-mute);margin-top:4px;}
+  .tam-row .val{font-family:var(--serif);font-size:72px;color:var(--ink);letter-spacing:-.02em;line-height:1;}
+
+  /* ═══ SLIDE 4 — SOLUTION ═══════════════════════════════════ */
+  .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:60px;flex:1;}
+  .feat{
+    border:1px solid var(--line);border-radius:16px;padding:40px;
+    display:flex;flex-direction:column;gap:16px;
+    background:linear-gradient(180deg,var(--navy-700),var(--navy-800));
+  }
+  .feat .icon{
+    width:56px;height:56px;border-radius:12px;
+    background:rgba(255,107,53,.12);color:var(--orange);
+    display:grid;place-items:center;font-family:var(--mono);font-size:24px;font-weight:600;
+    border:1px solid rgba(255,107,53,.3);
+  }
+  .feat .h{font-size:30px;font-weight:500;color:var(--ink);letter-spacing:-.01em;}
+  .feat .p{font-size:22px;color:var(--ink-dim);line-height:1.4;}
+  .feat.hero{
+    grid-column:span 3;
+    background:linear-gradient(120deg,rgba(255,107,53,.14),transparent 60%),var(--navy-700);
+    border-color:var(--line-strong);
+    display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;padding:56px;
+  }
+  .feat.hero .icon{width:72px;height:72px;font-size:28px;}
+  .feat.hero .h{font-size:44px;}
+  .feat.hero .p{font-size:26px;}
+
+  /* ═══ SLIDE 5 — COMPETITIVE ═══════════════════════════════════ */
+  .comp-table{margin-top:56px;flex:1;display:flex;flex-direction:column;}
+  .comp-row{
+    display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr 1fr;
+    align-items:center;gap:16px;
+    padding:22px 24px;border-bottom:1px solid var(--line);
+  }
+  .comp-row.head{
+    border-bottom:1px solid var(--line-strong);
+    font-family:var(--mono);font-size:15px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-mute);padding-bottom:18px;
+  }
+  .comp-row.hc{
+    background:linear-gradient(90deg,rgba(255,107,53,.1),transparent 80%);
+    border:1px solid var(--orange);border-radius:12px;margin:6px 0;
+  }
+  .comp-row .name{font-size:26px;color:var(--ink);font-weight:500;}
+  .comp-row.hc .name{color:var(--orange);}
+  .comp-row .name small{display:block;font-size:16px;color:var(--ink-mute);font-weight:400;margin-top:4px;font-family:var(--mono);letter-spacing:.06em;}
+  .comp-row .price{font-family:var(--serif);font-size:36px;color:var(--ink);letter-spacing:-.01em;}
+  .comp-row.hc .price{color:var(--orange);}
+  .comp-row .cell{font-size:20px;color:var(--ink-dim);font-family:var(--mono);letter-spacing:.02em;}
+  .check{display:inline-flex;align-items:center;gap:8px;color:var(--orange);}
+  .xmark{color:var(--ink-mute);}
+  .partial{color:var(--orange-soft);}
+
+  /* ═══ SLIDE 6 — PRICING ═══════════════════════════════════ */
+  .price-grid{display:grid;grid-template-columns:1fr 1.2fr 1fr;gap:24px;margin-top:60px;flex:1;align-items:stretch;}
+  .price-card{
+    border:1px solid var(--line);border-radius:18px;padding:48px 40px;
+    display:flex;flex-direction:column;background:var(--navy-700);
+  }
+  .price-card.featured{
+    background:linear-gradient(180deg,rgba(255,107,53,.14),var(--navy-700) 60%);
+    border:1px solid var(--orange);position:relative;
+    transform:translateY(-16px);
+  }
+  .price-card .tier{font-family:var(--mono);font-size:16px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);}
+  .price-card.featured .tier{color:var(--orange);}
+  .price-card .name{font-size:40px;font-weight:500;margin-top:12px;color:var(--ink);letter-spacing:-.01em;}
+  .price-card .amount{
+    font-family:var(--serif);font-size:104px;line-height:1;margin-top:24px;color:var(--ink);letter-spacing:-.03em;
+    display:flex;align-items:flex-start;gap:4px;
+  }
+  .price-card .amount .cur{font-size:48px;margin-top:18px;color:var(--ink-dim);}
+  .price-card .amount .per{font-size:22px;margin-top:auto;margin-bottom:16px;color:var(--ink-mute);font-family:var(--mono);letter-spacing:.04em;}
+  .price-card.featured .amount{color:var(--orange);}
+  .price-card .rule{margin:28px 0;}
+  .price-card ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px;}
+  .price-card li{font-size:22px;color:var(--ink-dim);display:flex;gap:12px;align-items:flex-start;line-height:1.3;}
+  .price-card li::before{content:"";width:16px;height:2px;background:var(--orange);margin-top:14px;flex-shrink:0;}
+  .price-card .badge{
+    position:absolute;top:-14px;right:32px;
+    background:var(--orange);color:var(--orange-ink);
+    font-family:var(--mono);font-size:13px;letter-spacing:.14em;
+    padding:6px 12px;border-radius:999px;text-transform:uppercase;font-weight:600;
+  }
+
+  /* ═══ SLIDE 7 — REVENUE ═══════════════════════════════════ */
+  .rev-wrap{margin-top:56px;flex:1;display:grid;grid-template-columns:1.4fr 1fr;gap:72px;}
+  .rev-chart{position:relative;padding:40px 0 60px 60px;border-left:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .bars{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;height:100%;align-items:end;}
+  .bar-col{display:flex;flex-direction:column;align-items:center;gap:12px;height:100%;justify-content:flex-end;}
+  .bar{
+    width:100%;background:linear-gradient(180deg,var(--orange),#C44518);
+    border-radius:6px 6px 0 0;position:relative;
+    display:flex;justify-content:center;
+  }
+  .bar.ghost{background:linear-gradient(180deg,var(--navy-500),var(--navy-700));border:1px dashed var(--line-strong);}
+  .bar .val{
+    position:absolute;top:-48px;
+    font-family:var(--serif);font-size:32px;color:var(--ink);letter-spacing:-.01em;white-space:nowrap;
+  }
+  .bar-col .yr{font-family:var(--mono);font-size:17px;letter-spacing:.1em;color:var(--ink-dim);text-transform:uppercase;}
+  .y-axis{
+    position:absolute;left:0;top:0;bottom:60px;width:50px;
+    display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;
+    font-family:var(--mono);font-size:14px;color:var(--ink-mute);padding-right:12px;
+  }
+  .rev-side{display:flex;flex-direction:column;gap:32px;justify-content:center;}
+  .rev-metric{padding:24px 0;border-top:1px solid var(--line);}
+  .rev-metric .lbl{font-family:var(--mono);font-size:15px;letter-spacing:.12em;color:var(--ink-mute);text-transform:uppercase;}
+  .rev-metric .val{font-family:var(--serif);font-size:72px;color:var(--ink);letter-spacing:-.02em;margin-top:8px;line-height:1;}
+  .rev-metric .val em{color:var(--orange);font-style:normal;}
+  .rev-metric .sub{font-size:20px;color:var(--ink-dim);margin-top:8px;}
+
+  /* ═══ SLIDE 8 — GTM ═══════════════════════════════════ */
+  .gtm-rail{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:56px;flex:1;}
+  .gtm-phase{display:flex;flex-direction:column;gap:20px;padding:40px;border:1px solid var(--line);border-radius:16px;background:var(--navy-700);position:relative;}
+  .gtm-phase .ph{font-family:var(--mono);font-size:15px;letter-spacing:.14em;color:var(--orange);text-transform:uppercase;}
+  .gtm-phase .ph .mo{color:var(--ink-mute);margin-left:10px;}
+  .gtm-phase h4{margin:0;font-size:36px;font-weight:500;letter-spacing:-.01em;color:var(--ink);}
+  .gtm-phase ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;}
+  .gtm-phase li{font-size:22px;color:var(--ink-dim);line-height:1.35;padding-left:22px;position:relative;}
+  .gtm-phase li::before{content:"→";position:absolute;left:0;color:var(--orange);font-family:var(--mono);}
+  .gtm-phase .kpi{
+    margin-top:auto;padding-top:24px;border-top:1px solid var(--line);
+    font-family:var(--serif);font-size:44px;color:var(--ink);letter-spacing:-.015em;
+  }
+  .gtm-phase .kpi small{display:block;font-family:var(--mono);font-size:14px;color:var(--ink-mute);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;}
+
+  /* ═══ SLIDE 9 — BUSINESS MODEL ═══════════════════════════════════ */
+  .bm-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;margin-top:40px;flex:1;}
+  .bm-figures{display:flex;flex-direction:column;gap:0;}
+  .bm-fig{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:baseline;padding:18px 0;border-top:1px solid var(--line);}
+  .bm-fig:last-child{border-bottom:1px solid var(--line);}
+  .bm-fig .lbl{font-size:24px;color:var(--ink);}
+  .bm-fig .lbl small{display:block;font-size:17px;color:var(--ink-mute);margin-top:4px;}
+  .bm-fig .v{font-family:var(--serif);font-size:52px;color:var(--orange);letter-spacing:-.02em;line-height:1;}
+  .bm-fig .v.neutral{color:var(--ink);}
+  .bm-narrative{display:flex;flex-direction:column;gap:20px;justify-content:center;padding:40px;background:var(--navy-700);border:1px solid var(--line);border-radius:18px;}
+  .bm-narrative .label{font-family:var(--mono);font-size:15px;letter-spacing:.14em;color:var(--orange);text-transform:uppercase;}
+  .bm-narrative p{margin:0;font-family:var(--serif);font-size:34px;line-height:1.2;color:var(--ink);letter-spacing:-.01em;}
+  .bm-narrative p em{color:var(--orange);font-style:italic;}
+
+  /* ═══ SLIDE 10 — ROADMAP ═══════════════════════════════════ */
+  .roadmap{margin-top:60px;flex:1;display:flex;flex-direction:column;}
+  .rm-axis{
+    position:relative;margin:0 60px;height:4px;background:var(--line-strong);
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .rm-axis::before{
+    content:"";position:absolute;left:0;top:0;bottom:0;width:33%;
+    background:var(--orange);
+  }
+  .rm-node{
+    width:20px;height:20px;border-radius:50%;background:var(--navy-800);
+    border:3px solid var(--line-strong);z-index:2;
+  }
+  .rm-node.done{border-color:var(--orange);background:var(--orange);}
+  .rm-node.cur{border-color:var(--orange);background:var(--navy-800);box-shadow:0 0 0 8px rgba(255,107,53,.15);}
+  .rm-cols{display:grid;grid-template-columns:repeat(4,1fr);margin:40px 0 0;gap:32px;}
+  .rm-col{padding:0 20px;}
+  .rm-col .q{font-family:var(--mono);font-size:16px;letter-spacing:.14em;color:var(--ink-mute);text-transform:uppercase;}
+  .rm-col.done .q, .rm-col.cur .q{color:var(--orange);}
+  .rm-col h4{font-family:var(--serif);font-size:38px;font-weight:400;margin:12px 0 20px;color:var(--ink);letter-spacing:-.015em;line-height:1.1;}
+  .rm-col ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;}
+  .rm-col li{font-size:21px;color:var(--ink-dim);line-height:1.3;}
+  .rm-col.future li{color:var(--ink-mute);}
+
+  /* ═══ SLIDE 11 — THE ASK ═══════════════════════════════════ */
+  .ask-wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:80px;margin-top:40px;flex:1;align-items:center;}
+  .ask-big{
+    font-family:var(--serif);font-size:280px;line-height:.9;color:var(--orange);letter-spacing:-.04em;
+  }
+  .ask-big small{display:block;font-size:44px;color:var(--ink-dim);letter-spacing:.1em;font-family:var(--mono);text-transform:uppercase;margin-top:24px;font-style:normal;}
+  .ask-use{display:flex;flex-direction:column;gap:0;}
+  .ask-label{font-family:var(--mono);font-size:16px;letter-spacing:.14em;color:var(--orange);text-transform:uppercase;margin-bottom:24px;}
+  .use-row{display:grid;grid-template-columns:80px 1fr auto;gap:24px;align-items:baseline;padding:22px 0;border-top:1px solid var(--line);}
+  .use-row:last-child{border-bottom:1px solid var(--line);}
+  .use-row .pct{font-family:var(--serif);font-size:48px;color:var(--orange);line-height:1;letter-spacing:-.02em;}
+  .use-row .txt{font-size:24px;color:var(--ink);}
+  .use-row .txt small{display:block;font-size:17px;color:var(--ink-mute);margin-top:4px;line-height:1.3;}
+  .use-row .amt{font-family:var(--mono);font-size:20px;color:var(--ink-dim);letter-spacing:.04em;}
+
+  .ask-term{
+    margin-top:40px;padding-top:32px;border-top:1px solid var(--line-strong);
+    display:grid;grid-template-columns:repeat(3,1fr);gap:32px;
+  }
+  .ask-term div{display:flex;flex-direction:column;gap:4px;}
+  .ask-term .k{font-family:var(--mono);font-size:14px;letter-spacing:.12em;color:var(--ink-mute);text-transform:uppercase;}
+  .ask-term .v{font-size:26px;color:var(--ink);font-weight:500;letter-spacing:-.01em;}
+
+  /* ═══ SLIDE 12 — CLOSING ═══════════════════════════════════ */
+  .s-close{
+    background:
+      radial-gradient(900px 600px at 20% 110%, rgba(255,107,53,.18), transparent 60%),
+      var(--navy-900);
+  }
+  .close-stack{margin-top:auto;display:flex;flex-direction:column;gap:40px;position:relative;z-index:2;}
+  .close-title{
+    font-family:var(--serif);font-size:180px;line-height:.95;letter-spacing:-.03em;margin:0;color:var(--ink);
+  }
+  .close-title em{color:var(--orange);font-style:italic;}
+  .contact-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:40px;
+    padding-top:48px;border-top:1px solid var(--line-strong);margin-top:40px;
+  }
+  .contact-grid div{display:flex;flex-direction:column;gap:10px;}
+  .contact-grid .k{font-family:var(--mono);font-size:14px;letter-spacing:.14em;color:var(--ink-mute);text-transform:uppercase;}
+  .contact-grid .v{font-size:26px;color:var(--ink);font-weight:500;letter-spacing:-.01em;word-break:break-all;}
+  .contact-grid .v a{color:inherit;text-decoration:none;}
+  .contact-grid .v.orange{color:var(--orange);}
+
+  /* misc */
+  .flex-spacer{flex:1;}
+  .nowrap{white-space:nowrap;}
+
+  /* ── back to site button ──────────────────────────────────────── */
+  .back-to-site{
+    position:fixed;
+    top:20px;
+    left:20px;
+    z-index:9999;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 16px;
+    background:rgba(10,22,40,0.9);
+    border:1px solid var(--line-strong);
+    border-radius:8px;
+    color:var(--ink-dim);
+    font-family:var(--mono);
+    font-size:13px;
+    letter-spacing:0.05em;
+    text-decoration:none;
+    transition:all 0.2s ease;
+    backdrop-filter:blur(8px);
+  }
+  .back-to-site:hover{
+    background:rgba(10,22,40,1);
+    border-color:var(--orange);
+    color:var(--ink);
+  }
+  .back-to-site svg{
+    width:14px;
+    height:14px;
+  }
+</style>
+</head>
+<body>
+
+<a href="/" class="back-to-site">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+  </svg>
+  grittyos.com
+</a>
+
+<deck-stage width="1920" height="1080">
+
+<!-- ═══ 1 · COVER ══════════════════════════════════════════════ -->
+<section data-label="Cover">
+  <div class="slide s-cover">
+    <div class="grid-bg"></div>
+
+    <div class="cover-badge">
+      <div>Pre-Seed Round · 2026</div>
+      <div class="num">$500K</div>
+      <div>SAFE · $5M Cap</div>
+    </div>
+
+    <div class="logo" style="position:relative;z-index:2;">
+      <span class="glyph"></span>
+      <span class="word"><b>Gritty</b><span>OS</span></span>
+    </div>
+
+    <div class="cover-stack">
+      <h1 class="cover-title">GrittyOS.<br/>The system for <span class="slash">gritty</span> operators.</h1>
+      <div class="cover-sub">CRM · Invoicing · Financials — built for the gritty few who run everything themselves.</div>
+
+      <div class="cover-meta">
+        <div>Investor Deck <b>— April 2026</b></div>
+        <div>Confidential · Do not distribute</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 2 · PROBLEM ══════════════════════════════════════════════ -->
+<section data-label="The Problem">
+  <div class="slide">
+    <div class="chrome">
+      <div class="mark"><span class="dot"></span><b>GrittyOS</b></div>
+      <div>02 / The Problem</div>
+    </div>
+
+    <div class="eyebrow"><span class="num">02</span><span class="sep">—</span><span class="label">The Problem</span></div>
+
+    <div style="margin-top:28px;max-width:1500px;">
+      <h2 class="display" style="font-size:72px;">Solo handymen run their business on <em>paper, texts, and guesswork.</em></h2>
+    </div>
+
+    <div class="two-col" style="margin-top:40px;gap:64px;">
+      <div>
+        <div class="problem-list" style="margin-top:0;">
+          <div class="problem-row">
+            <div class="n">01</div>
+            <div>
+              <div class="head">Tool fragmentation</div>
+              <div class="desc">Quotes in Notes, invoices in Word, payments via Venmo, receipts in a shoebox. Nothing talks to anything.</div>
+            </div>
+          </div>
+          <div class="problem-row">
+            <div class="n">02</div>
+            <div>
+              <div class="head">Enterprise software, priced for enterprises</div>
+              <div class="desc">ServiceTitan and Jobber are built for crews of 5+, with setup fees, onboarding calls, and $150–$300/mo price tags.</div>
+            </div>
+          </div>
+          <div class="problem-row">
+            <div class="n">03</div>
+            <div>
+              <div class="head">Invoices go out late — or never</div>
+              <div class="desc">The solo operator is behind the wheel all day. Admin happens at 10pm on a phone, if at all.</div>
+            </div>
+          </div>
+          <div class="problem-row">
+            <div class="n">04</div>
+            <div>
+              <div class="head">No financial visibility</div>
+              <div class="desc">At tax time, there is no P&amp;L. There is a bank statement and a prayer.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:24px;justify-content:center;">
+        <div class="stat-card">
+          <div class="fig">63<small>%</small></div>
+          <div class="cap">of solo tradespeople still send invoices manually via text, email, or paper.</div>
+          <div class="src">Intuit SMB Survey · 2024</div>
+        </div>
+        <div class="stat-card">
+          <div class="fig">$8,400</div>
+          <div class="cap">average annual revenue lost per solo handyman to missed follow-ups and unbilled jobs.</div>
+          <div class="src">GrittyOS customer interviews, n=47</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- ═══ 3 · TEAM ══════════════════════════════════════════════ -->
+<section data-label="Team">
+  <div class="slide">
+    <div class="chrome">
+      <div class="mark"><span class="dot"></span><b>GrittyOS</b></div>
+      <div>03 / Team</div>
+    </div>
+
+    <div class="eyebrow"><span class="num">03</span><span class="sep">—</span><span class="label">Team</span></div>
+
+    <div style="margin-top:28px;max-width:1500px;">
+      <h2 class="display" style="font-size:72px;">Two operators with <em>decades in the trenches</em> of solo trade work.</h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:64px;flex:1;">
+      <div style="padding:48px;border:1px solid var(--line-strong);border-radius:18px;background:linear-gradient(180deg,rgba(255,107,53,.05),transparent);display:flex;flex-direction:column;gap:18px;">
+        <div style="font-family:var(--mono);font-size:16px;letter-spacing:.14em;color:var(--orange);text-transform:uppercase;">Founder &amp; CEO</div>
+        <div style="font-family:var(--serif);font-size:72px;line-height:1;letter-spacing:-.02em;color:var(--ink);">Levi Moses</div>
+        <div style="font-size:22px;color:var(--ink-dim);line-height:1.4;margin-top:4px;">24 years in construction — 15 running my own solo shop. Lived every problem GrittyOS solves. Now building the software I wished I had, with AI as my co-pilot.</div>
+        <div style="margin-top:auto;padding-top:24px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:10px;">
+          <div style="font-size:20px;color:var(--ink);line-height:1.35;">· 24 yrs in the construction industry</div>
+          <div style="font-size:20px;color:var(--ink);line-height:1.35;">· 15 yrs running a solo construction business</div>
+          <div style="font-size:20px;color:var(--ink);line-height:1.35;">· Shipping product with AI-assisted engineering</div>
+        </div>
+      </div>
+
+      <div style="padding:48px;border:1px solid var(--line-strong);border-radius:18px;background:linear-gradient(180deg,rgba(255,107,53,.05),transparent);display:flex;flex-direction:column;gap:18px;">
+        <div style="font-family:var(--mono);font-size:16px;letter-spacing:.14em;color:var(--orange);text-transform:uppercase;">Head of Marketing &amp; Operations · 0.5 FTE</div>
+        <div style="font-family:var(--serif);font-size:72px;line-height:1;letter-spacing:-.02em;color:var(--ink);">Lola</div>
+        <div style="font-size:22px;color:var(--ink-dim);line-height:1.4;margin-top:4px;">Keeps the build on the rails and the story in the market. Runs marketing, organizes the product roadmap, and turns solo tradespeople into paid operators.</div>
+        <div style="margin-top:auto;padding-top:24px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:10px;">
+          <div style="font-size:20px;color:var(--ink);line-height:1.35;">· Organizes the build — roadmap, priorities, shipping</div>
+          <div style="font-size:20px;color:var(--ink);line-height:1.35;">· Leads marketing — brand, content, acquisition</div>
+          <div style="font-size:20px;color:var(--ink);line-height:1.35;">· Moves to full-time at $1M ARR</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:32px;padding-top:24px;border-top:1px solid var(--line-strong);display:flex;justify-content:space-between;align-items:baseline;">
+      <div style="font-family:var(--serif);font-style:italic;font-size:34px;color:var(--ink);">"We've been the customer for 15 years. Now we're building what we always wished we had."</div>
+      <div style="font-family:var(--mono);font-size:15px;letter-spacing:.12em;color:var(--ink-mute);text-transform:uppercase;">Levi Moses · Founder</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 4 · MARKET ══════════════════════════════════════════════ -->
+<section data-label="Market Opportunity">
+  <div class="slide">
+    <div class="chrome">
+      <div class="mark"><span class="dot"></span><b>GrittyOS</b></div>
+      <div>04 / Market</div>
+    </div>
+
+    <div class="eyebrow"><span class="num">04</span><span class="sep">—</span><span class="label">Market Opportunity</span></div>
+
+    <div style="margin-top:36px;max-width:1500px;">
+      <h2 class="display">A <em>$2B US market</em> hiding behind every one-person trade.</h2>
+    </div>
+
+    <div class="tam-wrap">
+      <div class="tam-rings">
+        <div class="ring tam"><span class="ring-lbl">TAM</span></div>
+        <div class="ring sam"><span class="ring-lbl">SAM</span></div>
+        <div class="ring som">
+          <span class="ring-lbl">SOM (Yr 4)</span>
+          <div style="text-align:center;">
+            <div style="font-family:var(--serif);font-size:72px;line-height:1;color:var(--orange);">$12M</div>
+            <div style="font-family:var(--mono);font-size:14px;letter-spacing:.14em;color:var(--ink-dim);text-transform:uppercase;margin-top:8px;">~3% penetration</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tam-legend">
+        <div class="tam-row">
+          <div class="tag">TAM</div>
+          <div class="lbl">Global field-service SMB software<small>All solo &amp; micro trades — US, EU, AU, CA</small></div>
+          <div class="val">$5.4B</div>
+        </div>
+        <div class="tam-row">
+          <div class="tag">SAM</div>
+          <div class="lbl">US solo tradespeople<small>~900K+ solo operators across handyman, plumbing, electrical, HVAC, landscaping &amp; adjacent trades (1099 &amp; sole-prop)</small></div>
+          <div class="val">$1.9B</div>
+        </div>
+        <div class="tam-row">
+          <div class="tag">SOM</div>
+          <div class="lbl">Year-4 target<small>~30K paid customers at $34 blended ARPU — ~3% of SAM, well below full penetration</small></div>
+          <div class="val">$12M</div>
+        </div>
+
+        <div style="font-family:var(--mono);font-size:16px;color:var(--ink-mute);letter-spacing:.08em;margin-top:8px;line-height:1.5;">
+          Sources: BLS 2024 industry employment data, IBISWorld US handyman /<br/>electrical / plumbing / HVAC / landscaping reports 2025, Gartner field-service SMB sizing.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 5 · SOLUTION ══════════════════════════════════════════════ -->
+<section data-label="Our Solution">
+  <div class="slide">
+    <div class="chrome">
+      <div class="mark"><span class="dot"></span><b>GrittyOS</b></div>
+      <div>05 / Solution</div>
+    </div>
+
+    <div class="eyebrow"><span class="num">05</span><span class="sep">—</span><span class="label">Our Solution</span></div>
+
+    <div style="margin-top:36px;max-width:1500px;">
+      <h2 class="display">One app. Quote to paid to <em>taxed</em> in four taps.</h2>
+    </div>
+
+    <div class="feat-grid">
+      <div class="feat hero">
+        <div>
+          <div class="icon">◆</div>
+          <div class="h" style="margin-top:20px;">The Command Bar</div>
+          <div class="p" style="margin-top:12px;">Voice-first capture from the truck. "New job, 112 Elm, unclog kitchen drain, $180." Quote, schedule, and contact record — created in one breath. The hands-free heart of GrittyOS.</div>
+        </div>
+        <div style="font-family:var(--mono);color:var(--ink-dim);font-size:20px;line-height:1.6;background:var(--navy-800);padding:28px;border-radius:12px;border:1px solid var(--line);">
+          <div style="color:var(--orange);">&gt; <span style="color:var(--ink);">new job</span></div>
+          <div style="padding-left:16px;">client: <span style="color:var(--ink);">Mrs. Alvarez</span></div>
+          <div style="padding-left:16px;">addr: <span style="color:var(--ink);">112 Elm St.</span></div>
+          <div style="padding-left:16px;">task: <span style="color:var(--ink);">kitchen drain</span></div>
+          <div style="padding-left:16px;">quote: <span style="color:var(--orange);">$180.00</span></div>
+          <div style="margin-top:12px;color:var(--ink-mute);">✓ saved · invoice draft created</div>
+        </div>
+      </div>
+
+      <div class="feat">
+        <div class="icon">◐</div>
+        <div class="h">Lightweight CRM</div>
+        <div class="p">Client cards with full job history, photos, and notes. Auto follow-ups at 30, 90, 180 days.</div>
+      </div>
+      <div class="feat">
+        <div class="icon">$</div>
+        <div class="h">One-tap invoicing</div>
+        <div class="p">Send pro invoices over SMS. Card + ACH payments. Auto-reminders. Tips enabled.</div>
+      </div>
+      <div class="feat">
+        <div class="icon">∿</div>
+        <div class="h">Financials that file themselves</div>
+        <div class="p">Every transaction categorized. Quarterly estimated taxes and Schedule C, ready.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 6 · COMPETITIVE ══════════════════════════════════════════════ -->
+<section data-label="Competitive Landscape">
+  <div class="slide">
+    <div class="chrome">
+      <div class="mark"><span class="dot"></span><b>GrittyOS</b></div>
+      <div>06 / Competition</div>
+    </div>
+
+    <div class="eyebrow"><span class="num">06</span><span class="sep">—</span><span class="label">Competitive Landscape</span></div>
+
+    <div style="margin-top:36px;max-width:1500px;">
+      <h2 class="display">Priced for the solo, built for the solo — <em>nothing else is both.</em></h2>
+    </div>
+
+    <div class="comp-table">
+      <div class="comp-row head">
+        <div>Product</div>
+        <div>Starting Price</div>
+        <div>Built for Solos</div>
+        <div>Financial Tracking</div>
+        <div>Setup Time</div>
+      </div>
+      <div class="comp-row hc">
+        <div class="name">GrittyOS<small>our product</small></div>
+        <div class="price">$29<span style="font-size:18px;color:var(--ink-mute);font-family:var(--mono);letter-spacing:.04em;">/mo</span></div>
+        <div class="cell"><span class="check">● Yes, natively</span></div>
+        <div class="cell"><span class="check">● Built-in</span></div>
+        <div class="cell"><span class="check">● &lt; 10 minutes</span></div>
+      </div>
+      <div class="comp-row">
+        <div class="name">Jobber<small>field service</small></div>
+        <div class="price">$49<span style="font-size:18px;color:var(--ink-mute);font-family:var(--mono);letter-spacing:.04em;">/mo</span></div>
+        <div class="cell"><span class="partial">◐ Crew-first</span></div>
+        <div class="cell"><span class="xmark">○ Add-on</span></div>
+        <div class="cell"><span class="xmark">○ Onboarding call</span></div>
+      </div>
+      <div class="comp-row">
+        <div class="name">Housecall Pro<small>field service</small></div>
+        <div class="price">$79<span style="font-size:18px;color:var(--ink-mute);font-family:var(--mono);letter-spacing:.04em;">/mo</span></div>
+        <div class="cell"><span class="partial">◐ Crew-first</span></div>
+        <div class="cell"><span class="xmark">○ Via QuickBooks</span></div>
+        <div class="cell"><span class="xmark">○ 1–2 hours</span></div>
+      </div>
+      <div class="comp-row">
+        <div class="name">ServiceTitan<small>enterprise ops</small></div>
+        <div class="price">$300+<span style="font-size:18px;color:var(--ink-mute);font-family:var(--mono);letter-spacing:.04em;">/mo</span></div>
+        <div class="cell"><span class="xmark">○ Enterprise</span></div>
+        <div class="cell"><span class="partial">◐ Heavy config</span></div>
+        <div class="cell"><span class="xmark">○ Weeks</span></div>
+      </div>
+      <div class="comp-row">
+        <div class="name">QuickBooks + spreadsheet<small>the incumbent stack</small></div>
+        <div class="price">$35+<span style="font-size:18px;color:var(--ink-mute);font-family:var(--mono);letter-spacing:.04em;">/mo</span></div>
+        <div class="cell"><span class="xmark">○ No CRM</span></div>
+        <div class="cell"><span class="check">● Accounting only</span></div>
+        <div class="cell"><span class="partial">◐ Hours of setup</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 7 · PRICING ══════════════════════════════════════════════ -->
+<section data-label="Pricing">
+  <div class="slide">
+    <div class="chrome">
+      <div class="mark"><span class="dot"></span><b>GrittyOS</b></div>
+      <div>07 / Pricing</div>
+    </div>
+
+    <div class="eyebrow"><span class="num">07</span><span class="sep">—</span><span class="label">Pricing</span></div>
+
+    <div style="margin-top:36px;max-width:1500px;">
+      <h2 class="display">Free to start. <em>$29</em> to run the whole business.</h2>
+    </div>
+
+    <div class="price-grid">
+      <div class="price-card">
+        <div class="tier">Tier 01</div>
+        <div class="name">Starter</div>
+        <div class="amount">
+          <span class="cur">$</span>0
+          <span class="per">forever</span>
+        </div>
+        <div class="rule"></div>
+        <ul>
+          <li>Up to 10 clients</li>
+          <li>5 invoices / month</li>
+          <li>Mobile app, unlimited jobs</li>
+          <li>Card payments (2.9% + 30¢)</li>
+        </ul>
+      </div>
+
+      <div class="price-card featured">
+        <div class="badge">Most popular</div>
+        <div class="tier">Tier 02</div>
+        <div class="name">Operator</div>
+        <div class="amount">
+          <span class="cur">$</span>29
+          <span class="per">/ month</span>
+        </div>
+        <div class="rule"></div>
+        <ul>
+          <li>Unlimited clients &amp; invoices</li>
+          <li>Voice Command Bar</li>
+          <li>Auto follow-ups &amp; reminders</li>
+          <li>Full financial tracking + P&amp;L</li>
+          <li>Lower payment processing (2.4%)</li>
+          <li>Quarterly tax estimates</li>
+        </ul>
+      </div>
+
+      <div class="price-card">
+        <div class="tier">Tier 03</div>
+        <div class="name">Pro</div>
+        <div class="amount">
+          <span class="cur">$</span>79
+          <span class="per">/ month</span>
+        </div>
+        <div class="rule"></div>
+        <ul>
+          <li>Everything in Operator</li>
+          <li>1 sub-contractor seat</li>
+          <li>Schedule C auto-filing</li>
+          <li>Priority support</li>
+          <li>Custom branding &amp; domain</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 8 · REVENUE ══════════════════════════════════════════════ -->
+<section data-label="Revenue Projections">
+  <div class="slide">
+    <div class="chrome">
+      <div class="mark"><span class="dot"></span><b>GrittyOS</b></div>
+      <div>08 / Revenue</div>
+    </div>
+
+    <div class="eyebrow"><span class="num">08</span><span class="sep">—</span><span class="label">Revenue Projections</span></div>
+
+    <div style="margin-top:36px;max-width:1500px;">
+      <h2 class="display"><em>$12M ARR</em> by year four. Conservative path.</h2>
+    </div>
+
+    <div class="rev-wrap">
+      <div class="rev-chart" style="min-height:520px;">
+        <div class="y-axis">
+          <div>$12M</div>
+          <div>$9M</div>
+          <div>$6M</div>
+          <div>$3M</div>
+          <div>$0</div>
+        </div>
+        <div class="bars">
+          <div class="bar-col">
+            <div class="bar" style="height:1.5%;"><div class="val">$180K</div></div>
+            <div class="yr">Y1 · 2026</div>
+          </div>
+          <div class="bar-col">
+            <div class="bar" style="height:11.7%;"><div class="val">$1.4M</div></div>
+            <div class="yr">Y2 · 2027</div>
+          </div>
+          <div class="bar-col">
+            <div class="bar" style="height:40%;"><div class="val">$4.8M</div></div>
+            <div class="yr">Y3 · 2028</div>
+          </div>
+          <div class="bar-col">
+            <div class="bar ghost" style="height:100%;"><div class="val">$12.0M</div></div>
+            <div class="yr">Y4 · 2029</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rev-side">
+        <div class="rev-metric" style="border-top:none;">
+          <div class="lbl">Paid customers · Y4</div>
+          <div class="val"><em>~30K</em></div>
+          <div class="sub">~10% of US solo handymen — still below SAM.</div>
+        </div>
+        <div class="rev-metric">
+          <div class="lbl">Blended ARPU</div>
+          <div class="val">$34<span style="font-size:36px;color:var(--ink-dim);">/mo</span></div>
+          <div class="sub">Operator + Pro mix + payments float.</div>
+        </div>
+        <div class="rev-metric">
+          <div class="lbl">Gross margin at scale</div>
+          <div class="val"><em>82%</em></div>
+          <div class="sub">SaaS economics; payments take-rate lifts over time.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 9 · GTM ══════════════════════════════════════════════ -->
+<section data-label="Go-to-Market">
+  <div class="slide">
+    <div class="chrome">
+      <div class="mark"><span class="dot"></span><b>GrittyOS</b></div>
+      <div>09 / GTM</div>
+    </div>
+
+    <div class="eyebrow"><span class="num">09</span><span class="sep">—</span><span class="label">Go-to-Market</span></div>
+
+    <div style="margin-top:36px;max-width:1500px;">
+      <h2 class="display">We meet solo tradespeople <em>where they already hang out.</em></h2>
+    </div>
+
+    <div class="gtm-rail">
+      <div class="gtm-phase">
+        <div class="ph">Phase 01 <span class="mo">· Mo. 0–6</span></div>
+        <h4>Seed the funnel</h4>
+        <ul>
+          <li>Hyper-targeted ads on YouTube trade channels</li>
+          <li>Free "Handyman Tax Starter" PDF — email capture</li>
+          <li>Reddit r/handyman, Facebook contractor groups</li>
+          <li>TikTok partnerships with 5 trade creators</li>
+        </ul>
+        <div class="kpi">
+          <small>First paid users</small>
+          500
+        </div>
+      </div>
+
+      <div class="gtm-phase">
+        <div class="ph">Phase 02 <span class="mo">· Mo. 6–18</span></div>
+        <h4>Referrals become the engine</h4>
+        <ul>
+          <li>"Refer 3, get a month free" in-app loop</li>
+          <li>Trade association partnerships (NAHB, PHCC)</li>
+          <li>Paid content: job-costing calculators, quote generators</li>
+          <li>State-by-state SEO landing pages</li>
+        </ul>
+        <div class="kpi">
+          <small>Paid users by month 18</small>
+          4,200
+        </div>
+      </div>
+
+      <div class="gtm-phase">
+        <div class="ph">Phase 03 <span class="mo">· Mo. 18–36</span></div>
+        <h4>Distribution at the supply counter</h4>
+        <ul>
+          <li>Co-branded offers with Home Depot Pro, Lowe's Pro</li>
+          <li>Insurance &amp; bonding partners bundle GrittyOS</li>
+          <li>White-label for state trade licensing boards</li>
+          <li>Expansion into electricians, plumbers, HVAC solos</li>
+        </ul>
+        <div class="kpi">
+          <small>Paid users by month 36</small>
+          13,700
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 10 · BUSINESS MODEL ══════════════════════════════════════════════ -->
+<section data-label="Business Model">
+  <div class="slide">
+    <div class="chrome">
+      <div class="mark"><span class="dot"></span><b>GrittyOS</b></div>
+      <div>10 / Business Model</div>
+    </div>
+
+    <div class="eyebrow"><span class="num">10</span><span class="sep">—</span><span class="label">Business Model</span></div>
+
+    <div style="margin-top:36px;max-width:1500px;">
+      <h2 class="display">Subscription first. <em>Payments compounding</em> underneath.</h2>
+    </div>
+
+    <div class="bm-grid">
+      <div class="bm-figures">
+        <div class="bm-fig">
+          <div class="lbl">Primary revenue<small>Monthly SaaS subscription</small></div>
+          <div class="v">78%</div>
+        </div>
+        <div class="bm-fig">
+          <div class="lbl">Payments take-rate<small>Interchange + margin on card &amp; ACH</small></div>
+          <div class="v">18%</div>
+        </div>
+        <div class="bm-fig">
+          <div class="lbl">Ancillary<small>Tax-filing fees, premium support, partners</small></div>
+          <div class="v">4%</div>
+        </div>
+        <div class="bm-fig">
+          <div class="lbl">Target CAC<small>Paid + organic blended</small></div>
+          <div class="v neutral">$62</div>
+        </div>
+        <div class="bm-fig">
+          <div class="lbl">LTV<small>At 3.1% monthly churn, 82% GM</small></div>
+          <div class="v neutral">$1,180</div>
+        </div>
+        <div class="bm-fig">
+          <div class="lbl">Payback period</div>
+          <div class="v">4.2 mo</div>
+        </div>
+      </div>
+
+      <div class="bm-narrative">
+        <div class="label">Why this compounds</div>
+        <p>Every invoice processed through GrittyOS is a <em>second revenue event.</em></p>
+        <p style="font-size:22px;font-family:var(--sans);color:var(--ink-dim);line-height:1.4;">A user on the $29 Operator plan who processes $6K/mo in card payments generates <span style="color:var(--ink);">~$43/mo</span> in payments revenue — <span style="color:var(--orange);">2.5× their subscription.</span> Payments scale with success, not seat count.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 11 · ROADMAP ══════════════════════════════════════════════ -->
+<section data-label="Product Roadmap">
+  <div class="slide">
+    <div class="chrome">
+      <div class="mark"><span class="dot"></span><b>GrittyOS</b></div>
+      <div>11 / Roadmap</div>
+    </div>
+
+    <div class="eyebrow"><span class="num">11</span><span class="sep">—</span><span class="label">Product Roadmap</span></div>
+
+    <div style="margin-top:36px;max-width:1500px;">
+      <h2 class="display">From <em>first invoice</em> to the full back office.</h2>
+    </div>
+
+    <div class="roadmap">
+      <div class="rm-axis">
+        <div class="rm-node done"></div>
+        <div class="rm-node cur"></div>
+        <div class="rm-node"></div>
+        <div class="rm-node"></div>
+      </div>
+
+      <div class="rm-cols">
+        <div class="rm-col done">
+          <div class="q">Q2 2026 · Shipped</div>
+          <h4>Core loop</h4>
+          <ul>
+            <li>iOS &amp; Android apps</li>
+            <li>Clients, jobs, invoices</li>
+            <li>Stripe payments</li>
+            <li>First 200 beta users</li>
+          </ul>
+        </div>
+        <div class="rm-col cur">
+          <div class="q">Q3 2026 · Now</div>
+          <h4>Voice Command Bar</h4>
+          <ul>
+            <li>Hands-free job capture</li>
+            <li>Auto follow-ups</li>
+            <li>Financial P&amp;L dashboard</li>
+            <li>Stripe ACH + tips</li>
+          </ul>
+        </div>
+        <div class="rm-col future">
+          <div class="q">Q4 2026</div>
+          <h4>Tax autopilot</h4>
+          <ul>
+            <li>Quarterly estimates</li>
+            <li>Schedule C generator</li>
+            <li>Mileage auto-logging</li>
+            <li>QuickBooks import</li>
+          </ul>
+        </div>
+        <div class="rm-col future">
+          <div class="q">2027</div>
+          <h4>The network</h4>
+          <ul>
+            <li>Subcontractor seats</li>
+            <li>Bonding &amp; insurance marketplace</li>
+            <li>Lead flow from partners</li>
+            <li>HVAC / plumbing verticals</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 12 · THE ASK ══════════════════════════════════════════════ -->
+<section data-label="The Ask">
+  <div class="slide">
+    <div class="chrome">
+      <div class="mark"><span class="dot"></span><b>GrittyOS</b></div>
+      <div>12 / The Ask</div>
+    </div>
+
+    <div class="eyebrow"><span class="num">12</span><span class="sep">—</span><span class="label">The Ask</span></div>
+
+    <div class="ask-wrap">
+      <div>
+        <div class="ask-big">$500K<small>Pre-seed · 18-month runway</small></div>
+      </div>
+
+      <div>
+        <div class="ask-label">Use of funds</div>
+        <div class="ask-use">
+          <div class="use-row">
+            <div class="pct">52%</div>
+            <div class="txt">Team &amp; operations<small>Two founders (Levi: full-time CEO + engineering; Lola: 0.5 FTE head of marketing). Payroll taxes. Design contractors for brand and UI.</small></div>
+            <div class="amt">$261,000</div>
+          </div>
+          <div class="use-row">
+            <div class="pct">28%</div>
+            <div class="txt">Go-to-market<small>Paid acquisition, creator partnerships, SEO content, referral program.</small></div>
+            <div class="amt">$140,000</div>
+          </div>
+          <div class="use-row">
+            <div class="pct">13%</div>
+            <div class="txt">Infrastructure &amp; compliance<small>AWS, tooling, SOC 2 Type I, legal, accounting.</small></div>
+            <div class="amt">$65,000</div>
+          </div>
+          <div class="use-row">
+            <div class="pct">7%</div>
+            <div class="txt">Reserve &amp; buffer<small>Contingency for surprises and flexibility.</small></div>
+            <div class="amt">$34,000</div>
+          </div>
+        </div>
+
+        <div class="ask-term">
+          <div>
+            <div class="k">Instrument</div>
+            <div class="v">SAFE</div>
+          </div>
+          <div>
+            <div class="k">Valuation cap</div>
+            <div class="v">$5M</div>
+          </div>
+          <div>
+            <div class="k">Milestone at close</div>
+            <div class="v">2,500 paid · $75K MRR</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ 13 · CLOSE ══════════════════════════════════════════════ -->
+<section data-label="Closing">
+  <div class="slide s-close">
+    <div class="chrome">
+      <div class="mark"><span class="dot"></span><b>GrittyOS</b></div>
+      <div>13 / Thank You</div>
+    </div>
+
+    <div class="logo" style="position:relative;z-index:2;">
+      <span class="glyph"></span>
+      <span class="word"><b>Gritty</b><span>OS</span></span>
+    </div>
+
+    <div class="close-stack">
+      <h1 class="close-title">Let's put <em>300,000</em><br/>solo operators<br/>back in command.</h1>
+
+      <div class="contact-grid" style="grid-template-columns:repeat(5,1fr);">
+        <div>
+          <div class="k">Founder &amp; CEO</div>
+          <div class="v">Levi Moses</div>
+        </div>
+        <div>
+          <div class="k">Head of Marketing</div>
+          <div class="v">Lola</div>
+        </div>
+        <div>
+          <div class="k">Email</div>
+          <div class="v orange"><a href="mailto:levi@grittyos.com">levi@grittyos.com</a></div>
+        </div>
+        <div>
+          <div class="k">Deck &amp; data room</div>
+          <div class="v"><a href="#">grittyos.com/investors</a></div>
+        </div>
+        <div>
+          <div class="k">Closing round</div>
+          <div class="v">June 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</deck-stage>
+
+</body>
+</html>
